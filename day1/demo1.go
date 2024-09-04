@@ -2,28 +2,28 @@ package day1
 
 import "slices"
 
-func lengthOfLongestSubstring(s string) int {
-	res := 0
-	chacaterMap := make(map[string]int)
-	var i, j int
-	for i < len(s) {
-		c := s[i]
-		chacaterMap[string(c)]++
-		if chacaterMap[string(c)] > 1 {
-			for j < i {
-				if chacaterMap[string(c)] > 1 {
-					chacaterMap[string(s[j])]--
-					j++
-				} else {
-					break
-				}
-			}
-		}
-		i++
-		res = max(res, i-j)
-	}
-	return res
-}
+//	func lengthOfLongestSubstring(s string) int {
+//		res := 0
+//		chacaterMap := make(map[string]int)
+//		var i, j int
+//		for i < len(s) {
+//			c := s[i]
+//			chacaterMap[string(c)]++
+//			if chacaterMap[string(c)] > 1 {
+//				for j < i {
+//					if chacaterMap[string(c)] > 1 {
+//						chacaterMap[string(s[j])]--
+//						j++
+//					} else {
+//						break
+//					}
+//				}
+//			}
+//			i++
+//			res = max(res, i-j)
+//		}
+//		return res
+//	}
 func threeSum(nums []int) [][]int {
 	res := [][]int{}
 	slices.Sort(nums)

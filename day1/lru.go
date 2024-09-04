@@ -1,7 +1,5 @@
 package day1
 
-import "fmt"
-
 type LRUCache struct {
 	capacity, size int
 	cache          map[int]*Node
@@ -68,14 +66,14 @@ func (l *LRUCache) remove(node *Node) {
 	node.next.prev = node.prev
 }
 
-func main() {
-	lruCache := constructor(4)
-	lruCache.Put(1, 1)
-	lruCache.Put(2, 2)
-	lruCache.Put(3, 3)
-	lruCache.Put(4, 4)
-	for lruCache.head.next != nil {
-		fmt.Printf("%d ", lruCache.head.key)
-		lruCache.head = lruCache.head.next
-	}
-}
+//func main() {
+//	lruCache := constructor(4)
+//	lruCache.Put(1, 1)
+//	lruCache.Put(2, 2)
+//	lruCache.Put(3, 3)
+//	lruCache.Put(4, 4)
+//	for lruCache.head.next != nil {
+//		fmt.Printf("%d ", lruCache.head.key)
+//		lruCache.head = lruCache.head.next
+//	}
+//}

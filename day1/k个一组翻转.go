@@ -9,22 +9,23 @@ func ReverseKGroup(head *ListNode, k int) *ListNode {
 	if head == nil {
 		return head
 	}
-	a, b := head, head
+	a := head
+	b := head
 	for i := 0; i < k; i++ {
+		b = b.Next
 		if b == nil {
 			return head
 		}
-		b = b.Next
 	}
-	c := reverse(a, b)
+	newHead := reverseList(a, b)
 	a.Next = ReverseKGroup(b, k)
-	return c
+	return newHead
 }
-func reverse(a, b *ListNode) *ListNode {
-	var pre, cur, nxt *ListNode
-	pre = nil
-	cur = a
-	nxt = a
+
+func reverseList(a, b *ListNode) *ListNode {
+	var pre *ListNode
+	cur := a
+	nxt := a
 	for cur != b {
 		nxt = cur.Next
 		cur.Next = pre
