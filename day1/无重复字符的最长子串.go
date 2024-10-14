@@ -24,16 +24,19 @@ package day1
 
 func lengthOfLongestSubstring(s string) int {
 	res := 0
-	cmap := map[string]int{}
+	ma := map[string]int{}
 	j := 0
 	for i := 0; i < len(s); i++ {
 		c := s[i]
-		cmap[string(c)]++
-		for cmap[string(c)] > 1 && j < i {
-			cmap[string(s[j])]--
-			j++
+		ma[string(c)]++
+
+		for ; ma[string(c)] > 1 && j < i; j++ {
+			a := s[j]
+			ma[string(a)]--
 		}
-		res = max(res, (i - j + 1))
+		res = max(res, i-j+1)
 	}
+
 	return res
+
 }

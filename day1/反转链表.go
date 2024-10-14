@@ -2,12 +2,12 @@ package day1
 
 func ReverseList(head *ListNode) *ListNode {
 	var pre *ListNode
-	next, cur := head, head
+	cur, nxt := head, head
 	for cur != nil {
-		next = cur.Next
+		nxt = cur.Next
 		cur.Next = pre
 		pre = cur
-		cur = next
+		cur = nxt
 	}
 	return pre
 }
