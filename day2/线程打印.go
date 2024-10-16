@@ -1,4 +1,4 @@
-package main
+package day2
 
 import (
 	"fmt"
@@ -19,7 +19,7 @@ func main() {
 			for current != id {
 				cond.Wait() // 等待条件满足
 			}
-			fmt.Printf("%c", id) // 打印当前协程的编号
+			fmt.Print(id) // 打印当前协程的编号
 			if current == 'a' {
 				current = 'b'
 			} else {
