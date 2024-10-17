@@ -2,26 +2,25 @@ package day1
 
 import "testing"
 
-func Test_longestPalindrome(t *testing.T) {
+func TestLongestPalindrome(t *testing.T) {
 	type args struct {
 		s string
 	}
 	tests := []struct {
 		name string
 		args args
-		want string
+		want int
 	}{
 		{
-			name: "case1",
 			args: args{
-				s: "abccccdd",
+				s: "bb",
 			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := longestPalindrome(tt.args.s); got != tt.want {
-				t.Errorf("longestPalindrome() = %v, want %v", got, tt.want)
+			if got := LongestPalindrome(tt.args.s); got != tt.want {
+				t.Errorf("LongestPalindrome() = %v, want %v", got, tt.want)
 			}
 		})
 	}

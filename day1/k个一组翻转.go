@@ -1,5 +1,7 @@
 package day1
 
+import "fmt"
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -47,6 +49,12 @@ func ReverseKGroup(head *ListNode, k int) *ListNode {
 		}
 	}
 	newHead := reverseList(a, b)
+	tmp := newHead
+	for tmp != nil {
+		fmt.Println(tmp.Val)
+		tmp = tmp.Next
+	}
+	fmt.Println()
 	a.Next = ReverseKGroup(b, k)
 	return newHead
 }
