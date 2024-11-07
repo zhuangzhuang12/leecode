@@ -1,16 +1,17 @@
 package day1
 
 func inorderTraversal(root *TreeNode) *[]int {
-	res := &[]int{}
-	treverse(root, res)
-	return res
-}
+	vals := &[]int{}
+	var preorder func(*TreeNode)
+	preorder = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
 
-func treverse(root *TreeNode, res *[]int) {
-	if root == nil {
-		return
+		preorder(node.Left)
+		*vals = append(*vals, node.Val)
+		preorder(node.Right)
 	}
-	treverse(root.Left, res)
-	*res = append(*res, root.Val)
-	treverse(root.Right, res)
+	preorder(root)
+	return vals
 }

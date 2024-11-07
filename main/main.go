@@ -2,40 +2,38 @@ package main
 
 import (
 	"fmt"
-	"sync"
 )
 
 func main() {
-	var wg sync.WaitGroup
-	mu := &sync.Mutex{}
-	cond := sync.NewCond(mu)
+	ch1 := make(chan int, 2)
+	ch2 := make(chan int, 2)
 
-	current := 'a' // 当前要打印的数字
+	go func() {
+		ch1 <- 10
+		close(ch1)
+	}()
 
-	printNum := func(id rune) {
-		defer wg.Done()
-		for i := 0; i < 2; i++ { // 每个协程打印两轮
-			mu.Lock()
-			for current != id {
-				cond.Wait() // 等待条件满足
-			}
-			fmt.Printf("%c", id) // 打印当前协程的编号
-			if current == 'a' {
-				current = 'b'
+	go func() {
+		ch2 <- 20
+		close(ch2)
+	}()
+
+	for ch1 != nil || ch2 != nil {
+		select {
+		case num, ok := <-ch1:
+			if ok {
+				fmt.Println("Received from ch1:", num)
 			} else {
-				current = 'a'
+				ch1 = nil // 当ch1关闭时，将ch1设为nil，避免再尝试从中接收
 			}
-			cond.Broadcast() // 通知其他协程
-			mu.Unlock()
+		case num, ok := <-ch2:
+			if ok {
+				fmt.Println("Received from ch2:", num)
+			} else {
+				ch2 = nil // 当ch2关闭时，将ch2设为nil，避免再尝试从中接收
+			}
+
 		}
 	}
 
-	wg.Add(2)
-
-	// 启动四个协程
-	go printNum('a')
-	go printNum('b')
-
-	// 等待所有协程完成
-	wg.Wait()
 }
